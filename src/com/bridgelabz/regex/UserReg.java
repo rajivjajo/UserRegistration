@@ -11,11 +11,14 @@ public class UserReg {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter first name starting with capital letter of at-least 3 character : \n");
         String firstName = scanner.nextLine();
-        Matcher matcher = pattern.matcher(firstName);
-        if ( matcher.matches()){
-            System.out.println("First name is valid!");
+        System.out.println("Enter last name starting with capital letter of at-least 3 character : \n");
+        String lastName = scanner.nextLine();
+        Matcher matcher1 = pattern.matcher(firstName);
+        Matcher matcher2 = pattern.matcher(lastName);
+        if ( matcher1.matches() && matcher2.matches()){
+            System.out.println("First and last name is valid!");
         }else {
-            System.out.println("First is invalid!");
+            System.out.println("First and last name is invalid!");
         }
 
     }
