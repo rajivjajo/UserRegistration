@@ -57,7 +57,7 @@ public class UserRegUtility {
     }
 
     public boolean validatePassword(String passWord) {
-            String passWordSet = "^.{8,}(?=.*[0-9]).+$";
+            String passWordSet = "^.{8,}(?=.*[0-9]).+(?=.*[!@#$%^&*(),.?\":{}|<>]).+$";
             Pattern pattern = Pattern.compile(passWordSet);
             Matcher matcher = pattern.matcher(passWord);
             if (matcher.matches()) {
@@ -65,7 +65,7 @@ public class UserRegUtility {
                 return true;
             } else {
 
-                System.out.println("Password should have atleast 8 chracters , 1 letter should be upper case and one numeric value !!");
+                System.out.println("Password should have at-least 8 chracters , 1 letter should be upper case  one numeric value and 1 special character !!");
 
                 return false;
             }
