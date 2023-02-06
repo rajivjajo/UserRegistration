@@ -31,7 +31,7 @@ public class UserRegUtility {
     }
 
     public boolean validateEmail(String email) {
-        String ValidEmail = "^[a-z0-9]{1,}[_+-.]?[a-z0-9]*[^_+-.][@]([a-z0-9])+([.][a-z]{2,})(.[a-z]{2,3})?$";
+        String ValidEmail = "^[a-z0-9]+[_+-.]?[a-z0-9]*[^_+-.][@]([a-z0-9])+([.][a-z]{2,})(.[a-z]{2,3})?$";
         Pattern pattern = Pattern.compile(ValidEmail);
         Matcher matcher = pattern.matcher(email);
         if (matcher.matches()) {
@@ -64,7 +64,9 @@ public class UserRegUtility {
                 System.out.println("Password is fine!!");
                 return true;
             } else {
-                System.out.println("Password should have atleast 8 characters and one numeric value! !!");
+
+                System.out.println("Password should have atleast 8 chracters , 1 letter should be upper case and one numeric value !!");
+
                 return false;
             }
         }
