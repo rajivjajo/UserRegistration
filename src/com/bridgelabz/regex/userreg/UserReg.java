@@ -21,14 +21,16 @@ public class UserReg {
             String emailId = scanner.nextLine();
             System.out.println("Enter Phone number : ");
             String phoneNumber = scanner.nextLine();
+            System.out.println("Enter Password : ");
+            String password = scanner.nextLine();
 
 
             userRegUtility.validateFirstName(firstName);
             userRegUtility.validateLastName(lastName);
             userRegUtility.validateEmail(emailId);
             userRegUtility.validatePhoneNumber(phoneNumber);
+            userRegUtility.validatePassword(password);
             break;
         }
-
     }
 }
