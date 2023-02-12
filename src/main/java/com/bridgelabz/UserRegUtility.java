@@ -1,4 +1,4 @@
-package com.bridgelabz.regex.userreg;
+package com.bridgelabz;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +44,7 @@ public class UserRegUtility {
     }
 
     public boolean validatePhoneNumber(String phoneNumber) {
-        String phoneNum = "^[0-9]+[ ][1-9]{1}[0-9]{9}$";
+        String phoneNum = "^[+]?[0-9]{2}[ ]?[1-9]{1}[0-9]{9}$";
         Pattern pattern = Pattern.compile(phoneNum);
         Matcher matcher = pattern.matcher(phoneNumber);
         if (matcher.matches()) {
@@ -57,18 +57,30 @@ public class UserRegUtility {
     }
 
     public boolean validatePassword(String passWord) {
-            String passWordSet = "^.{8,}(?=.*[0-9]).+(?=.*[!@#$%^&*(),.?\":{}|<>]).+$";
-            Pattern pattern = Pattern.compile(passWordSet);
-            Matcher matcher = pattern.matcher(passWord);
-            if (matcher.matches()) {
-                System.out.println("Password is fine!!");
-                return true;
-            } else {
-
-                System.out.println("Password should have at-least 8 chracters , 1 letter should be upper case  one numeric value and 1 special character !!");
-
-                return false;
-            }
+        String passWordSet = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,}$";
+        Pattern pattern = Pattern.compile(passWordSet);
+        Matcher matcher = pattern.matcher(passWord);
+        if (matcher.matches()) {
+            System.out.println("Password is fine!!");
+            return true;
+        } else {
+            System.out.println("Password should have at-least 8 characters , 1 letter should be upper case  one numeric value and 1 special character !!");
+            return false;
         }
     }
+
+    static boolean sampleEmails(String emails) {
+        String validSampleEmails = "^[a-z0-9]+[_+-.]?[a-z0-9]*[^_+-.][@]([a-z0-9])+([.][a-z]{2,})(.[a-z]{2,3})?$";
+        Pattern pattern = Pattern.compile(validSampleEmails);
+        Matcher matcher = pattern.matcher(emails);
+        if (matcher.matches()) {
+            System.out.println("sample Email is Valid");
+            return true;
+        } else {
+            System.out.println("sample Email is Invalid");
+            return false;
+        }
+    }
+
+}
 
