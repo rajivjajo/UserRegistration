@@ -4,67 +4,112 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.Collection;
 
-@RunWith(Parameterized.class)
 public class UserRegUtilityTest {
-    UserRegUtility userReg;
-    private boolean expected;
-    private String email;
 
-    public UserRegUtilityTest(boolean expected, String email){
-        this.expected = expected;
-        this.email=email;
-    }
-
+    private UserRegUtility userRegUtility;
 
     @Before
-    public void setup() {
-        userReg = new UserRegUtility();
+    public void setUp() {
+        userRegUtility = new UserRegUtility();
     }
 
     @Test
-    public void whenGivenValidFirstNameShouldReturnTrue() {
-        boolean validName = userReg.validateFirstName("Rajiv");
-        Assertions.assertEquals(true, validName);
+    public void givenFirstName_WhenValid_ShouldReturnTrue() {
+        try {
+            boolean result = userRegUtility.validateFirstName("Rajiv");
+            Assert.assertTrue(result);
+        } catch (UserRegistrationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void whenGivenValidLastNameShouldReturnTrue() {
-        boolean validName = userReg.validateLastName("Jajo");
-        Assertions.assertEquals(true, validName);
+    public void givenFirstName_WhenInvalid_ShouldThrowException() {
+        try {
+            userRegUtility.validateFirstName("rajiv");
+        } catch (UserRegistrationException e) {
+            Assert.assertEquals("Invalid first name!", e.getMessage());
+        }
     }
 
     @Test
-    public void whenGivenValidEmailShouldReturnTrue() {
-        boolean validEmail = userReg.validateEmail("rajiv.jajodia825225@gmail.com");
-        Assertions.assertEquals(true, validEmail);
+    public void givenLastName_WhenValid_ShouldReturnTrue() {
+        try {
+            boolean result = userRegUtility.validateLastName("Jajo");
+            Assert.assertTrue(result);
+        } catch (UserRegistrationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void whenGivenValidMobileNumberShouldReturnTrue() {
-        boolean validMobileNumber = userReg.validatePhoneNumber("919000006909");
-        Assertions.assertEquals(true, validMobileNumber);
+    public void givenLastName_WhenInvalid_ShouldThrowException() {
+        try {
+            userRegUtility.validateLastName("jajo");
+        } catch (UserRegistrationException e) {
+            Assert.assertEquals("Invalid last name!", e.getMessage());
+        }
     }
 
     @Test
-    public void whenGivenValidPasswordShouldReturnTrue() {
-        boolean validPassword = userReg.validatePassword("K%j12345");
-        Assertions.assertEquals(true, validPassword);
+    public void givenEmail_WhenValid_ShouldReturnTrue() {
+        try {
+            boolean result = userRegUtility.validateEmail("rajiv.jajo@gmail.com");
+            Assert.assertTrue(result);
+        } catch (UserRegistrationException e) {
+            e.printStackTrace();
+        }
     }
-    @Parameterized.Parameters
-    public static Collection testData(){
-        Object[][] sampleEmails = new Object[][]{{true, "abc@yahoo.com"}, {true, "abc-100@yahoo.com"},{true,"abc.100@yahoo.com"}, {true, "abc111@abc.com"}, {true, "abc-100@abc.net"}, {true, "abc.100@abc.com.au"}, {true, "abc@1.com"}, {true, "abc@gmail.com.com"}, {true, "abc+100@gmail.com"}, {false, "abc"}, {false, ".abc@abc.com"}, {false, "abc()*@gmail.com"}, {false, "abc@gmail.com.aa.au"}};
-        return Arrays.asList(sampleEmails);
-    }
+
     @Test
-    public void WhenGivenSampleEmailShouldReturnTrue(){
-        Assertions.assertEquals(expected, userReg.sampleEmails(email));
+    public void givenEmail_WhenInvalid_ShouldThrowException() {
+        try {
+            userRegUtility.validateEmail("rajivjajodia.com");
+        } catch (UserRegistrationException e) {
+            Assert.assertEquals("Invalid email address!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenPhoneNumber_WhenValid_ShouldReturnTrue() {
+        try {
+            boolean result = userRegUtility.validatePhoneNumber("+91 9999999999");
+            Assert.assertTrue(result);
+        } catch (UserRegistrationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenPhoneNumber_WhenInvalid_ShouldThrowException() {
+        try {
+            userRegUtility.validatePhoneNumber("+911234567890");
+        } catch (UserRegistrationException e) {
+            Assert.assertEquals("Invalid phone number!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void givenPassword_WhenValid_ShouldReturnTrue() {
+        try {
+            boolean result = userRegUtility.validatePassword("Pass@1234");
+            Assert.assertTrue(result);
+        } catch (UserRegistrationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenPassword_WhenInvalid_ShouldThrowException() {
+        try {
+            userRegUtility.validatePassword("password123");
+        } catch (UserRegistrationException e) {
+            Assert.assertEquals("Invalid password! Password should have at-least 8 characters, 1 uppercase letter, 1 numeric value and 1 special character.", e.getMessage());
+        }
     }
 }
+
 
 

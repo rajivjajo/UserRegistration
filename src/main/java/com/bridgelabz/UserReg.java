@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class UserReg {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UserRegistrationException {
         System.out.println("Welcome to user registration regex problem!");
         Scanner scanner = new Scanner(System.in);
         UserRegUtility userRegUtility = new UserRegUtility();
